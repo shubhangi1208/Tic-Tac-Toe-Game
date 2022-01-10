@@ -81,6 +81,65 @@ public class Main {
             showBoard();
         }
     }
+    //UC 7 Check for Winner or Draw
+    private static boolean checkWin() {
+        if(checkDiagonal() || checkColumnWin() || checkRowWin()) {
+            if(player1Play == 0) {
+                System.out.println("Player 1 WON THE GAME !!!!");
+            } else {
+                System.out.println("Player 2 WON THE GAME !!!!");
+            }
+            showBoard();
+            return true;
+        } else {
+                if(checkDraw()) {
+                    System.out.println("The Game is DRAW. As there is no any location for Player Symbol.");
+                    showBoard();
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    //Method to check for Game Draw
+    private static boolean checkDraw() {
+        boolean flag = true;
+        for(int i = 1; i <= 9; i++) {
+            if(Board[i] == '_') {
+                flag = false;
+            }
+        }
+        return flag;
+    }
+
+    //Method to check for Diagonal Win
+    private static boolean checkDiagonal() {
+        if(!(Board[1] == '_') && Board[1] == Board[5] && Board[1] == Board[9]
+                || !(Board[3] == '_') && Board[3] == Board[5] && Board[3] == Board[7]) {
+            return true;
+        }
+        return false;
+    }
+
+    //Method to Check for Row Win
+    private static boolean checkRowWin() {
+        for( int i = 1; i < Board.length; i += 3) {
+            if(!(Board[i] == '_') && Board[i] == Board[i+1] && Board[i] == Board[i+2]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Method to Check for Column Win
+    private static boolean checkColumnWin() {
+        for(int i = 1; i <= 3; i++) {
+            if(!(Board[i] == '_') && Board[i] == Board[i+3] && Board[i] == Board[i+6]) {
+                return true;
+            }
+        }
+        return false;
+    }
     public static void main(String[] args) {
         System.out.println("Welcome to Tic Tac Toe Game Simulator.");
 
@@ -89,7 +148,7 @@ public class Main {
         showBoard1();
         int tossValue = flipToss();
         gamePlay(tossValue);
-
+        checkWin();
     }
 }
 

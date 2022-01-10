@@ -1,4 +1,6 @@
 package com.bridgelabz;
+import javax.swing.*;
+import java.sql.SQLOutput;
 import java.util.*;
 public class Main {
 
@@ -142,13 +144,21 @@ public class Main {
     }
     public static void main(String[] args) {
         System.out.println("Welcome to Tic Tac Toe Game Simulator.");
-
+        char userChoice;
+        do {
         initializeBoard();
         playerChoice();
         showBoard1();
         int tossValue = flipToss();
         gamePlay(tossValue);
         checkWin();
+
+        System.out.println("Do you want to continue.");
+        userChoice = sc.next().toUpperCase().charAt(0);
+    }
+        while(userChoice == 'Y');
+
+
     }
 }
 
